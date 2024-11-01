@@ -23,7 +23,14 @@ export const AddTask = ()=>{
         console.log(value)
     }
     const handelOpenModal = ()=> setIsOpend(true)
-    const handelCloseModal = ()=> setIsOpend(false)
+    const handelCloseModal = ()=> {
+        setValue({
+            task: "",
+            desc: "",
+            status: ""
+        });
+        setIsOpend(false)
+    }
     return(
         <>
             <button 
@@ -49,7 +56,7 @@ export const AddTask = ()=>{
                                 onClick={handelCloseModal}
                             >
                                 <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    <path stroke="currentColor"  strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                 </svg>
                                 <span className="sr-only">Close modal</span>
                             </button>
@@ -87,11 +94,11 @@ export const AddTask = ()=>{
                                     <select 
                                         id="category" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        name='status'
+                                        name="status"
                                         value={value.status}
                                         onChange={handelChange}
                                     >
-                                        <option selected></option>
+                                        <option selected value=""></option>
                                         <option value="Complited">Complited</option>
                                         <option value="Pending">Pending</option>
                                         <option value="New">New</option>
