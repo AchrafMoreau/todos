@@ -1,9 +1,36 @@
 import { AddTask } from "./todos/addtask";
+import prisma from "./lib/prisma";
+import { ReactNode } from "react";
+import { Status } from "@prisma/client";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import DisplayTask from "./todos/displaytask";
+config.autoAddCss = false;
+// enum Status{
+//   Complited = "Complited",
+//   New = "New",
+//   Tomorrow = "Tomorrow",
+//   Pending = "Pending",
+// }
+export interface TaskType{
+    id: number;
+    task: String;
+    status: Status;
+    desc: String;
+    updated_at: Date;
+    created_at: Date;
+}
 
-export default function Home() {
+async function getTasks(){
+    const tasks = await prisma.task.findMany({})
+    return tasks
+}
+export default async function Home() {
+    let tasks= []
+    tasks = await getTasks()
   return (
-    <main className="flex flex-col gap-3 justify-center items-end h-[100vh] mx-12">
-      <div className="mr-5 mb-5">
+    <main className="grid justify-center m-0 p-0 items-center h-[100vh] mx-12">
+      <div className="mr-5 flex justify-end  m-0 p-0">
         <AddTask />
       </div>
       <table className="w-[80vw] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -27,27 +54,7 @@ export default function Home() {
             </tr>
         </thead>
         <tbody>
-            <tr key="product-1" className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17
-                </th>
-                <td className="px-6 py-4">
-                    Silver
-                </td>
-                <td className="px-6 py-4">
-                    Laptop
-                </td>
-                <td className="px-6 py-4">
-                    $2999
-                </td>
-                <td className="px-6 py-4">
-                    <div className="flex gap-2">
-                        <button>Edit</button>
-                        <button>Delete</button>
-                        <button>Change Status</button>
-                    </div>
-                </td>
-            </tr>
+            <DisplayTask elements={tasks} />
         </tbody>
 
       </table>

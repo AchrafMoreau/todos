@@ -1,10 +1,13 @@
 'use client'
 
+import axios, { AxiosRequestConfig } from "axios"
 import { useState } from "react"
+import { useRouter } from "next/navigation";
 
 export const AddTask = ()=>{
 
     const [isOpend, setIsOpend] = useState(false)
+    const route = useRouter()
     const [value, setValue] = useState({
         task: "",
         desc: "",
@@ -21,6 +24,22 @@ export const AddTask = ()=>{
     const handelSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         console.log(value)
+        
+        const config: AxiosRequestConfig = {
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            data:{
+                task : value.task,
+                desc : value.desc,
+                status : value.status,
+            }
+        }
+        axios.post('/api/add-tasks', config.data, config)
+            .then(() => handelCloseModal())
+            .catch((err) => console.log(err))
+        
+        route.refresh()
     }
     const handelOpenModal = ()=> setIsOpend(true)
     const handelCloseModal = ()=> {
