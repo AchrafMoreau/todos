@@ -1,6 +1,5 @@
 import { AddTask } from "./todos/addtask";
 import prisma from "./lib/prisma";
-import { ReactNode } from "react";
 import { Status } from "@prisma/client";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -14,9 +13,9 @@ config.autoAddCss = false;
 // }
 export interface TaskType{
     id: number;
-    task: String;
+    task: string;
     status: Status;
-    desc: String;
+    desc: string;
     updated_at: Date;
     created_at: Date;
 }

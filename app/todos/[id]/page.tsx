@@ -2,7 +2,6 @@
 
 import axios, { AxiosRequestConfig } from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenAlt } from "@fortawesome/free-solid-svg-icons/faPenAlt";
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -50,7 +49,7 @@ export default function AddTask(){
             }
         }
         axios.put(`/api/tasks/${id}`, config.data, config)
-            .then(({data}) => {
+            .then(() => {
                 console.log(" task was update ")
                 route.refresh()
                 route.push("/")

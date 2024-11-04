@@ -4,8 +4,7 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faPenAlt } from "@fortawesome/free-solid-svg-icons/faPenAlt";
 import { TaskType } from "../page";
 import { Status } from "@prisma/client";
-import { useEffect } from "react";
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -25,9 +24,7 @@ export default function DisplayTask({elements}: {elements:TaskType[]}){
         router.refresh()
     }
 
-    const handelEdite = (id:number)=>{
-        console.log(id)
-    }
+  
     return elements.map((elm:TaskType)=> (
         <tr key={elm.id as React.Key} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
